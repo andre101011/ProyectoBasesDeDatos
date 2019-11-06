@@ -7,7 +7,9 @@ const express = require('express'),
 const app = express();
 
 // importing routes
-const customerRoutes = require('./routes/customer');
+const rutaAuxiliar = require('./routes/auxiliar');
+const rutaimplemento = require('./routes/implemento');
+
 
 // settings
 app.set('port', process.env.PORT || 3000);
@@ -19,14 +21,15 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
   host: 'localhost',
   user: 'root',
-  password: 'jhon0223',
+  password: 'root',
   port: 3306,
-  database: 'crudnodejsmysql'
+  database: 'proyectoBD'
 }, 'single'));
 app.use(express.urlencoded({extended: false}));
 
 // routes
-app.use('/', customerRoutes);
+app.use('/', rutaAuxiliar);
+app.use('/', rutaimplemento);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

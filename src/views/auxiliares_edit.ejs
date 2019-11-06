@@ -1,3 +1,4 @@
+  
 <% include partials/_header %>
 
 <div class="container mt-5">
@@ -6,22 +7,26 @@
       <div class="card-body">
         <form action="/update/<%= data.id %>" method="POST">
           <div class="form-group">
-            <input type="text" name="name" value="<%= data.name%>" placeholder="Name" class="form-control" autofocus>
+            <input type="text" name="nombre" value="<%= data.nombre%>" placeholder="Nombre" class="form-control" autofocus>
           </div>
           <div class="form-group">
-            <input type="text" name="address" value="<%= data.address%>" placeholder="Address" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="text" name="phone" value="<%= data.phone%>" placeholder="Phone" class="form-control">
+            <input type="number" name="id" value="<%= data.id%>" placeholder="Id" class="form-control">
           </div>
 
+
           <button type="submit" class="btn btn-primary">
-            save customer
+            Guardar Auxiliar
           </button>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 <% include partials/_footer %>
