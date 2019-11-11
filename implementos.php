@@ -1,5 +1,9 @@
 <?php include("db.php"); ?>
-
+<?php 
+include('login/session.php'); 
+$result=mysqli_query($conn, "select * from users where user_id='$session_id'")or die('Error In Session');
+$row=mysqli_fetch_array($result);
+?>
 <?php include('includes/header.php'); ?>
 
 <main class="container p-4">

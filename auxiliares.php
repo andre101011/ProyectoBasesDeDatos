@@ -1,6 +1,12 @@
-<?php include("db.php"); ?>
+<?php 
+chdir($_SERVER['DOCUMENT_ROOT']);
+include("proyecto/db.php"); 
+include('proyecto/includes/header.php'); 
+include('proyecto/login/session.php'); 
+$result=mysqli_query($conn, "select * from users where user_id='$session_id'")or die('Error In Session');
+$row=mysqli_fetch_array($result);
+?>
 
-<?php include('includes/header.php'); ?>
 
 <style>
 body {
@@ -31,15 +37,23 @@ body {
       <!-- Formulario del auxiliar -->
       <div class="card card-body">
 
-        <form action="save.php" method="POST">
+        <form action="/proyecto/save.php" method="POST">
           <div class="form-group">
             <input type="text" name="nombre" class="form-control" placeholder="Nombre"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
           </div>
           <input type="submit" name="save_auxiliar" class="btn btn-success btn-block" value="Guardar">
         </form>
-        
+
       </div>
-    </div>
+        <div class="card card-body" style="margin-top: 20px">
+          <!--Botón de graficar-->
+          
+          <a href="/proyecto/graph/index.php?entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
+          <i class="fas fa-chart-line"></i>
+          </a>
+        </div>
+      </div>
+
     <div class="col-md-8">
 
       <table class="table table-bordered table-striped" id="myTable">
@@ -64,11 +78,11 @@ body {
             <td>
 
               <!--Botón de editar-->
-              <a href="edit.php?id=<?php echo $row['id']?>& entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
+              <a href="/proyecto/edit.php?id=<?php echo $row['id']?>& entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
               <!--Botón de eliminar-->
-              <a href="delete.php?id=<?php echo $row['id'] ?>& entidad=<?php echo 'auxiliar' ?>" class="btn btn-danger">
+              <a href="/proyecto/delete.php?id=<?php echo $row['id'] ?>& entidad=<?php echo 'auxiliar' ?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
@@ -76,6 +90,7 @@ body {
           <?php } ?>
         </tbody>
       </table>
+      
     </div>
   </div>
 
