@@ -6,14 +6,14 @@ include('db.php');
 if (isset($_POST['save_auxiliar'])) {
 
   $nombre= $_POST['nombre'];
-  $id = extraerIniciales($nombre);
+  $iniciales = extraerIniciales($nombre);
 
   #Verifica si ya hay un auxiliar con ese id
   $query = "SELECT * FROM auxiliar WHERE id= '$id'";
   $result = mysqli_query($conn, $query);
   if (mysqli_num_rows($result) == 0) {
     #Inserta el nuevo auxiliar
-    $query = "INSERT INTO auxiliar(id,nombre) VALUES ('$id','$nombre')";
+    $query = "INSERT INTO auxiliar(iniciales,nombre) VALUES ('$iniciales','$nombre')";
     $result = mysqli_query($conn, $query);
     if(!$result) {
       die("Query Failed.");
@@ -54,6 +54,33 @@ if (isset($_POST['save_implemento'])) {
   }
 }
 
+
+# Si es un cable
+if (isset($_POST['save_cable_red'])) {
+  $codigo= $_POST['codigo'];
+  $categoria= $_POST['categoria'];
+
+  #Verifica si ya hay un cable con ese codigo
+  $query = "SELECT * FROM cable_red WHERE codigo= '$codigo'";
+  $result = mysqli_query($conn, $query);
+  if (mysqli_num_rows($result) == 0) {
+
+    #Inserta el nuevo cable
+    $query = "INSERT INTO cable_red (codigo, categoria) VALUES ('$codigo', '$categoria')";
+    $result = mysqli_query($conn, $query);
+    if(!$result) {
+      print $result;
+      die("Query Failed.");
+    }
+    $_SESSION['message'] = 'cable guardado exitosamente';
+    $_SESSION['message_type'] = 'success';
+    header('Location: cables.php');
+  }else{
+    $_SESSION['message'] = 'Ya existe un cable con este código';
+    $_SESSION['message_type'] = 'danger';
+    header('Location: cables.php');
+  }
+}
 
 
 function extraerIniciales($nombre) {

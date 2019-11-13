@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2019 a las 05:15:37
+-- Tiempo de generación: 13-11-2019 a las 04:10:23
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.1.33
 
@@ -45,7 +45,8 @@ CREATE TABLE `account` (
 --
 
 CREATE TABLE `auxiliar` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL,
+  `iniciales` varchar(10) NOT NULL,
   `nombre` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -53,16 +54,16 @@ CREATE TABLE `auxiliar` (
 -- Volcado de datos para la tabla `auxiliar`
 --
 
-INSERT INTO `auxiliar` (`id`, `nombre`) VALUES
-('ACDB', 'Armando Casas De Bareque'),
-('AFLR', 'Andrés Felipe Llinás R'),
-('DBG', 'Daniel Bonilla Guevara'),
-('JCO', 'Juan Carlos Osorio'),
-('JDL', 'Juan Diego Lopez'),
-('MAC', 'Melissa Alvarez Castro'),
-('MES', 'Mario Ernesto Salazar'),
-('NFS', 'Neyder Figueroa Sanchez'),
-('SPDR', 'Sacarías Piedras Del Río');
+INSERT INTO `auxiliar` (`id`, `iniciales`, `nombre`) VALUES
+(13, 'AFLR', 'Andres Felipe Llinás Rodríguez'),
+(14, 'CAP', 'Carlos Alfonso Pumarejo'),
+(15, 'DBG', 'Daniel Bonilla Guevara'),
+(16, 'CA', 'Carlos Alfredo '),
+(17, 'ACDB', 'Armando Casas De Bareque'),
+(18, 'SPDR', 'Sacarías Piedras Del Río'),
+(19, 'MAC', 'Melissa Alvarez Castro'),
+(20, 'NFS', 'Neyder Figueroa Sanchez'),
+(21, 'MES', 'Mario Ernesto Salazar');
 
 -- --------------------------------------------------------
 
@@ -71,9 +72,16 @@ INSERT INTO `auxiliar` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `cable_red` (
-  `categoria` varchar(50) DEFAULT NULL,
-  `codigo` varchar(30) NOT NULL
+  `codigo` varchar(30) NOT NULL,
+  `categoria` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cable_red`
+--
+
+INSERT INTO `cable_red` (`codigo`, `categoria`) VALUES
+('1', '7');
 
 -- --------------------------------------------------------
 
@@ -118,7 +126,7 @@ CREATE TABLE `entrada_minuta` (
   `fecha_salida` datetime(6) NOT NULL,
   `id` double NOT NULL,
   `observacion` varchar(500) DEFAULT NULL,
-  `Auxiliar_id` varchar(10) NOT NULL
+  `Auxiliar_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -153,11 +161,7 @@ INSERT INTO `implemento` (`observacion`, `codigo`) VALUES
 ('PC 11', '17'),
 ('PC 12', '18'),
 ('MAC 2', '2'),
-('PC 18', '21'),
-('MAC 3', '3 '),
-('CABLE DE RED 1', '4'),
-('CABLE DE RED 2', '5'),
-('CABLE DE RED 3', '6');
+('PC 18', '21');
 
 -- --------------------------------------------------------
 
@@ -216,7 +220,7 @@ CREATE TABLE `prestamo` (
   `fecha_prestamo` datetime(6) DEFAULT NULL,
   `id` double NOT NULL,
   `observacion` varchar(500) DEFAULT NULL,
-  `Auxiliar_id` varchar(10) NOT NULL,
+  `Auxiliar_id` int(11) NOT NULL,
   `Persona_cedula` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -263,7 +267,7 @@ CREATE TABLE `turno` (
   `hora_fin` datetime NOT NULL,
   `periodo_academico` varchar(30) NOT NULL,
   `dia` varchar(20) NOT NULL,
-  `Auxiliar_id` varchar(10) NOT NULL
+  `Auxiliar_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -406,6 +410,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `auxiliar`
+--
+ALTER TABLE `auxiliar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

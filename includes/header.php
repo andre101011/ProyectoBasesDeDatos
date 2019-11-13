@@ -28,6 +28,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/proyecto/implementos.php">Implementos</a>
         </li>
+        <a class="nav-link" href="/proyecto/cables.php">Cables</a>
+        </li>
       </ul>
       
       <ul class="navbar-nav">

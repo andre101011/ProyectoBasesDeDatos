@@ -33,5 +33,20 @@ if  (isset($_GET["codigo"]) AND ($_GET["entidad"]=="implemento")){
   header('Location: implementos.php');
 }
 
+# Si es un cable
+if  (isset($_GET["codigo"]) AND ($_GET["entidad"]=="cable_red")){
+  $codigo = $_GET['codigo'];
+  $entidad=$_GET['entidad'];
+  print "codigo ". $codigo . "  ";
+  $query = "DELETE FROM cable_red WHERE codigo = ('$codigo')";
+  $result = mysqli_query($conn, $query);
+  if(!$result) {
+    die("Query Failed.");
+  }
+
+  $_SESSION['message'] = 'cable con codigo: '. $codigo .' eliminado exitosamente';
+  $_SESSION['message_type'] = 'danger';
+  header('Location: cables.php');
+}
 
 ?>
