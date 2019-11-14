@@ -30,12 +30,9 @@ $row=mysqli_fetch_array($result);
           <div class="form-group">
             <input type="text" name="categoria" class="form-control" placeholder="Categoría" autofocus>
           </div>
-<<<<<<< HEAD
           <div class="form-group">
             <input type="text" name="observacion" class="form-control" placeholder="Observacion" autofocus>
           </div>
-=======
->>>>>>> master
           <input type="submit" name="save_cable_red" class="btn btn-success btn-block" value="Guardar">
         </form>
         
@@ -48,33 +45,21 @@ $row=mysqli_fetch_array($result);
           <tr>
             <th>Codigo</th>
             <th>Categoría</th>
-<<<<<<< HEAD
             <th>Observación</th>
-=======
->>>>>>> master
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
 
           <?php
-<<<<<<< HEAD
           $query = "SELECT * FROM cable_red cr, implemento im WHERE cr.codigo=im.codigo";
           $result_auxiliares = mysqli_query($conn, $query);    
-=======
-          $query = "SELECT * FROM cable_red ";
-          $result_auxiliares = mysqli_query($conn, $query);    
-
->>>>>>> master
           
           while($row = mysqli_fetch_assoc($result_auxiliares)) { ?>
           <tr>
             <td><?php echo $row['codigo']; ?></td>
             <td><?php echo $row['categoria']; ?></td>
-<<<<<<< HEAD
             <td><?php echo $row['observacion']; ?></td>
-=======
->>>>>>> master
             <td>
               <!--Botón de editar-->
               <a href="edit.php?codigo=<?php echo $row['codigo']?> & entidad=<?php echo 'cable_red'?>" class="btn btn-secondary">

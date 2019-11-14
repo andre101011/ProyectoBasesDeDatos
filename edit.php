@@ -20,10 +20,7 @@ if  (isset($_GET["id"]) AND ($_GET['entidad']=='auxiliar')){
     $id = $_GET['id'];
     $nombre= $_POST['nombre'];
     $iniciales = extraerIniciales($nombre);
-<<<<<<< HEAD
     $iniciales = crearInicialesUnicas($iniciales);
-=======
->>>>>>> master
     $query = "UPDATE auxiliar set iniciales='$iniciales',nombre = '$nombre' WHERE id='$id'";
     mysqli_query($conn, $query);
     $_SESSION['message'] = 'Auxiliar con ID: '. $id .' actualizado exitosamente';
