@@ -73,7 +73,11 @@
 								var ctx = document.getElementById("chart").getContext('2d');
 								var myChart = new Chart(ctx, {
 									//Tipo de grafica
+<<<<<<< HEAD
 									type: 'doughnut',
+=======
+									type: 'line',
+>>>>>>> master
 									data: {
 										labels: [1,2,3,4,5,6,7,8,9],
 										datasets: 
