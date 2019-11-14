@@ -20,7 +20,7 @@ $row=mysqli_fetch_array($result);
       </div>
       <?php session_unset(); } ?>
 
-         <!-- Formulario de implemento -->
+         <!-- Formulario de cable_red -->
       <div class="card card-body">
 
         <form action="save.php" method="POST">
@@ -28,9 +28,12 @@ $row=mysqli_fetch_array($result);
             <input type="text" name="codigo" class="form-control" placeholder="Codigo" autofocus>
           </div>
           <div class="form-group">
+            <input type="text" name="categoria" class="form-control" placeholder="Categoría" autofocus>
+          </div>
+          <div class="form-group">
             <input type="text" name="observacion" class="form-control" placeholder="Observacion" autofocus>
           </div>
-          <input type="submit" name="save_implemento" class="btn btn-success btn-block" value="Guardar">
+          <input type="submit" name="save_cable_red" class="btn btn-success btn-block" value="Guardar">
         </form>
         
       </div>
@@ -41,28 +44,29 @@ $row=mysqli_fetch_array($result);
         <thead>
           <tr>
             <th>Codigo</th>
-            <th>Observacion</th>
+            <th>Categoría</th>
+            <th>Observación</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
 
           <?php
-          $query = "SELECT * FROM implemento ";
+          $query = "SELECT * FROM cable_red cr, implemento im WHERE cr.codigo=im.codigo";
           $result_auxiliares = mysqli_query($conn, $query);    
-
           
           while($row = mysqli_fetch_assoc($result_auxiliares)) { ?>
           <tr>
             <td><?php echo $row['codigo']; ?></td>
+            <td><?php echo $row['categoria']; ?></td>
             <td><?php echo $row['observacion']; ?></td>
             <td>
               <!--Botón de editar-->
-              <a href="edit.php?codigo=<?php echo $row['codigo']?> & entidad=<?php echo 'implemento'?>" class="btn btn-secondary">
+              <a href="edit.php?codigo=<?php echo $row['codigo']?> & entidad=<?php echo 'cable_red'?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
               <!--Botón de eliminar-->
-              <a href="delete.php?codigo=<?php echo $row['codigo'] ?>& entidad=<?php echo 'implemento'?>" class="btn btn-danger">
+              <a href="delete.php?codigo=<?php echo $row['codigo'] ?>& entidad=<?php echo 'cable_red'?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
