@@ -29,6 +29,31 @@ if  (isset($_GET["id"]) AND ($_GET['entidad']=='auxiliar')){
   }
 }
 
+//Codigo para editar profesor
+if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='persona')){
+  $cedula = $_GET['cedula'];
+  $entidad  =$_GET['entidad'];
+  $query = "SELECT * FROM persona WHERE cedula= '$cedula'";
+  $result = mysqli_query($conn, $query);
+  
+  if (mysqli_num_rows($result) == 1) {
+      $row = mysqli_fetch_array($result);
+      $nombre = $row['nombres'];
+      $apellido = $row['apellidos'];
+  }
+
+  if (isset($_POST['update_persona'])) {
+    $cedula = $_GET['cedula'];
+    $nombre= $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $query = "UPDATE persona set nombres = '$nombre',apellidos = '$apellido' WHERE cedula='$cedula'";
+    mysqli_query($conn, $query);
+    $_SESSION['message'] = 'Profesor con Cedula: '. $cedula .' actualizado exitosamente';
+    $_SESSION['message_type'] = 'warning';
+    header('Location: profesor.php');
+  }
+}
+
 //Codigo para editar implemento
 if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='implemento')){
   $codigo = $_GET['codigo'];
@@ -88,6 +113,16 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='cable_red')){
       <div class="form-group">
         <label for="nombre">Nombre</label>
           <input name="nombre" type="text" class="form-control" value="<?php echo $nombre; ?>" placeholder="Actualizar nombre" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
+        </div>
+
+      <!--Interfaz para profesor-->
+      <?php elseif($_GET['entidad']=='persona'): ?>
+      <form action="edit.php?id=<?php echo $_GET['cedula'] ?>& entidad=<?php echo $_GET['entidad'] ?>" method="POST">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+          <input name="nombre" type="text" class="form-control" value="<?php echo $nombre; ?>" placeholder="Actualizar nombre" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
+        <label for="apellido">Apellido</label>
+          <input name="apellido" type="text" class="form-control" value="<?php echo $apellido; ?>" placeholder="Actualizar apellido" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El apellido solo puede contener letras">  
         </div>
         
       <!--Interfaz para implementos-->

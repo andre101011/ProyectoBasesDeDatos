@@ -18,6 +18,27 @@ if (isset($_POST['save_auxiliar'])) {
   header('Location: auxiliares.php');
 }
 
+
+# Si es un profesor
+if (isset($_POST['save_profesor'])) {
+
+  $nombre= $_POST['nombre'];
+  $cedula= $_POST['cedula'];
+  $apellido= $_POST['apellido'];
+  $query = "INSERT INTO persona(cedula,nombres,apellidos) VALUES ('$cedula','$nombre','$apellido')";
+  $result = mysqli_query($conn, $query);
+  if(!$result) {
+    die("Falló la inserción de la persona");
+  }
+
+  $query = "INSERT INTO profesor(cedula) VALUES ('$cedula')";
+  $result = mysqli_query($conn, $query);
+  if(!$result) {
+    die("Falló la inserción del profesor");
+  }
+  header('Location: profesor.php');
+}
+
 # Si es un implemento
 if (isset($_POST['save_implemento'])) {
   $codigo= $_POST['codigo'];
