@@ -1,8 +1,8 @@
 <?php 
 chdir($_SERVER['DOCUMENT_ROOT']);
-include("proyecto/db.php"); 
-include('proyecto/includes/header.php'); 
-include('proyecto/login/session.php'); 
+include("ProyectoBasesDeDatos/db.php"); 
+include('ProyectoBasesDeDatos/includes/header.php'); 
+include('ProyectoBasesDeDatos/login/session.php'); 
 $result=mysqli_query($conn, "select * from users where user_id='$session_id'")or die('Error In Session');
 $row=mysqli_fetch_array($result);
 ?>
