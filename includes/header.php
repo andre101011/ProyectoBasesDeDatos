@@ -20,16 +20,22 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/proyecto/auxiliares.php">Auxiliares</a>
+          <a class="nav-link" href="/ProyectoBasesDeDatos/auxiliares.php">Auxiliares</a>
+        </li>
+        </li>
+        <a class="nav-link" href="/ProyectoBasesDeDatos/profesores.php">Profesores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Estudiantes</a>
         </li>
+        <!--
         <li class="nav-item">
-          <a class="nav-link" href="/proyecto/implementos.php">Implementos</a>
+          <a class="nav-link" href="/ProyectoBasesDeDatos/implementos.php">Implementos</a>
         </li>
-        <a class="nav-link" href="/proyecto/cables.php">Cables</a>
+        -->
+        <a class="nav-link" href="/ProyectoBasesDeDatos/cables.php">Cables</a>
         </li>
+
       </ul>
       
       <ul class="navbar-nav">
@@ -42,7 +48,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="/proyecto/login/logout.php" class="nav-link">
+          <a href="/ProyectoBasesDeDatos/login/logout.php" class="nav-link">
           <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
           </a>
         </li>

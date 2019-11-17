@@ -11,7 +11,7 @@
 		<!-- FONT AWESOME -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 		<!-- CSS -->
-		<link href="/proyecto/login/style.css" rel="stylesheet" type="text/css">
+		<link href="/ProyectoBasesDeDatos/login/style.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<body>
@@ -40,7 +40,7 @@
 					if ($num_row > 0) 
 						{			
 							$_SESSION['user_id']=$row['user_id'];
-							header('location:/proyecto/auxiliares.php');
+							header('location:/ProyectoBasesDeDatos/auxiliares.php');
 						}
 					else
 						{	
@@ -52,7 +52,7 @@
 				}
 				?>
 				<div class="clearfix">
-				<p class="text-center"><a href="/proyecto/login/sign_up.php">Crear una cuenta</a></p>
+				<p class="text-center"><a href="/ProyectoBasesDeDatos/login/sign_up.php">Crear una cuenta</a></p>
 				</div>        
 			</form>
 		

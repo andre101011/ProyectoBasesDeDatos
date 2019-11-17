@@ -1,10 +1,8 @@
 <?php 
 chdir($_SERVER['DOCUMENT_ROOT']);
-include("proyecto/db.php"); 
-include('proyecto/includes/header.php'); 
-include('proyecto/login/session.php'); 
-$result=mysqli_query($conn, "select * from users where user_id='$session_id'")or die('Error In Session');
-$row=mysqli_fetch_array($result);
+include('ProyectoBasesDeDatos/login/session.php'); 
+include('ProyectoBasesDeDatos/db.php'); 
+include('ProyectoBasesDeDatos/includes/header.php'); 
 ?>
 
 
@@ -32,12 +30,14 @@ body {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?php session_unset(); } ?>
+      <?php //session_unset(); 
+      unset( $_SESSION['message']);
+    } ?>
 
-      <!-- Formulario del auxiliar -->
+      <!-- Formulario del profesor -->
       <div class="card card-body">
 
-        <form action="/proyecto/save.php" method="POST">
+        <form action="/ProyectoBasesDeDatos/save.php" method="POST">
           <div class="form-group">
             <input type="text" name="cedula" class="form-control" placeholder="Cedula"  pattern="[0-9]+"autofocus required title="La cedula solo puede contener numeros">
           </div>
@@ -45,19 +45,13 @@ body {
             <input type="text" name="nombre" class="form-control" placeholder="Nombre"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
           </div>
           <div class="form-group">
-            <input type="text" name="apellido" class="form-control" placeholder="Apellido"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El apellido solo puede contener letras">
+            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El apellidos solo puede contener letras">
           </div>
           <input type="submit" name="save_profesor" class="btn btn-success btn-block" value="Guardar">
         </form>
 
       </div>
-        <div class="card card-body" style="margin-top: 20px">
-          <!--Botón de graficar-->
-          
-          <a href="/proyecto/graph/index.php?entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
-          <i class="fas fa-chart-line"></i>
-          </a>
-        </div>
+
       </div>
 
     <div class="col-md-8">
@@ -66,8 +60,8 @@ body {
         <thead>
           <tr>
             <th>Cedula</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
             <th>Acción</th>
           </tr>
         </thead>
@@ -75,11 +69,10 @@ body {
 
 
           <?php
-          $query = "SELECT profesor.cedula, persona.nombres,persona.apellidos FROM persona inner join profesor on persona.cedula = profesor.cedula";
+          $query = "SELECT * FROM profesor pro, persona per WHERE pro.cedula=per.cedula";
           $result_profesores = mysqli_query($conn, $query);    
 
           while($row = mysqli_fetch_assoc($result_profesores)) { ?>
-
           <tr>
             <td><?php echo $row['cedula']; ?></td>
             <td><?php echo $row['nombres']; ?></td>
@@ -87,11 +80,11 @@ body {
             <td>
 
               <!--Botón de editar-->
-              <a href="/proyecto/edit.php?id=<?php echo $row['cedula']?>& entidad=<?php echo 'persona'?>" class="btn btn-secondary">
+              <a href="/ProyectoBasesDeDatos/edit.php?cedula=<?php echo $row['cedula']?>& entidad=<?php echo 'profesor'?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
               <!--Botón de eliminar-->
-              <a href="/proyecto/delete.php?id=<?php echo $row['cedula'] ?>& entidad=<?php echo 'persona' ?>" class="btn btn-danger">
+              <a href="/ProyectoBasesDeDatos/delete.php?cedula=<?php echo $row['cedula'] ?>& entidad=<?php echo 'profesor'?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
