@@ -32,6 +32,64 @@ if  (isset($_GET["id"]) AND ($_GET['entidad']=='auxiliar')){
 }
 
 
+//Codigo para editar profesor
+if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='profesor')){
+  $cedula = $_GET['cedula'];
+  $entidad =$_GET['entidad'];
+  $query = "SELECT * FROM persona per, profesor pro WHERE per.cedula=pro.cedula AND pro.cedula=$cedula";
+  $result = mysqli_query($conn, $query);
+  if (mysqli_num_rows($result) == 1) {
+      $row = mysqli_fetch_array($result);
+      $cedula = $row['cedula'];
+      $nombres = $row['nombres'];
+      $apellidos = $row['apellidos'];
+    }
+  if (isset($_POST['update_profesor'])) {
+    $cedula = $_GET['cedula'];
+    $nombres = $_POST['nombres'];
+    $apellidos = $_POST['apellidos'];
+    $query = "UPDATE persona set nombres='$nombres',apellidos='$apellidos' WHERE cedula=$cedula";
+    mysqli_query($conn, $query);
+    //$query = "UPDATE profesor set cedula='$cedula' WHERE cedula='$cedula'";
+    //mysqli_query($conn, $query);
+    $_SESSION['message'] = 'Profesor con cedula: '. $cedula .' actualizado exitosamente';
+    $_SESSION['message_type'] = 'warning';
+    header('Location: profesores.php');
+  }
+}
+
+//Codigo para editar estudiante
+if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='estudiante')){
+  $cedula = $_GET['cedula'];
+  $entidad =$_GET['entidad'];
+  $query = "SELECT * FROM persona per, estudiante est WHERE per.cedula=est.cedula AND est.cedula=$cedula";
+  $result = mysqli_query($conn, $query);
+    
+  if (mysqli_num_rows($result) == 1) {
+      $row = mysqli_fetch_array($result);
+      $cedula = $row['cedula'];
+      $nombres = $row['nombres'];
+      $apellidos = $row['apellidos'];
+      $programa = $row['programa'];
+      $estado = $row['estado'];
+    }
+
+  if (isset($_POST['update_estudiante'])) {
+    $cedula = $_GET['cedula'];
+    $nombres = $_POST['nombres'];
+    $apellidos = $_POST['apellidos'];
+    $programa = $_POST['programa'];
+    $estado = $_POST['estado'];
+    $query = "UPDATE persona set nombres='$nombres',apellidos='$apellidos' WHERE cedula=$cedula";
+    mysqli_query($conn, $query);
+    $query = "UPDATE estudiante set programa='$programa',estado='$estado' WHERE cedula=$cedula";
+    mysqli_query($conn, $query);
+    $_SESSION['message'] = 'estudiante con cedula: '. $cedula .' actualizado exitosamente';
+    $_SESSION['message_type'] = 'warning';
+    header('Location: estudiantes.php');
+  }
+}
+
 //Codigo para editar implemento
 if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='implemento')){
   $codigo = $_GET['codigo'];
@@ -83,33 +141,7 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='cable_red')){
   }
 }
 
-//Codigo para editar profesor
-if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='profesor')){
-  $cedula = $_GET['cedula'];
-  $entidad =$_GET['entidad'];
-  $query = "SELECT * FROM persona per, profesor pro WHERE per.cedula=pro.cedula AND pro.cedula=$cedula";
-  $result = mysqli_query($conn, $query);
-    
-  if (mysqli_num_rows($result) == 1) {
-      $row = mysqli_fetch_array($result);
-      $cedula = $row['cedula'];
-      $nombres = $row['nombres'];
-      $apellidos = $row['apellidos'];
-    }
 
-  if (isset($_POST['update_profesor'])) {
-    $cedula = $_GET['cedula'];
-    $nombres = $_POST['nombres'];
-    $apellidos = $_POST['apellidos'];
-    $query = "UPDATE persona set nombres='$nombres',apellidos='$apellidos' WHERE cedula=$cedula";
-    mysqli_query($conn, $query);
-    //$query = "UPDATE profesor set cedula='$cedula' WHERE cedula='$cedula'";
-    //mysqli_query($conn, $query);
-    $_SESSION['message'] = 'Profesor con cedula: '. $cedula .' actualizado exitosamente';
-    $_SESSION['message_type'] = 'warning';
-    header('Location: profesores.php');
-  }
-}
 ?>
 
 <div class="container p-4">
@@ -124,6 +156,51 @@ if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='profesor')){
         <label for="nombre">Nombre</label>
           <input name="nombre" type="text" class="form-control" value="<?php echo $nombre; ?>" placeholder="Actualizar nombre" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
         </div>
+
+
+        
+              <!--Interfaz para profesores-->
+      <?php elseif($_GET['entidad']=='profesor'): ?>
+      <form action="edit.php?cedula=<?php echo $_GET['cedula']?>&entidad=<?php echo $_GET['entidad'] ?>" method="POST">
+      <div class="form-group">
+        <label for="cedula">Cedula</label>
+        <input name="cedula" type="text" class="form-control" value="<?php echo $cedula; ?>" placeholder="Actualizar cedula" readonly  >
+      </div>
+      <div class="form-group">
+        <label for="nombres">Nombre</label>
+        <input name="nombres" type="text" class="form-control" value="<?php echo $nombres; ?>" placeholder="Actualizar nombre" >
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input name="apellidos" type="text" class="form-control" value="<?php echo $apellidos; ?>" placeholder="Actualizar apellidos" >
+      </div>
+
+
+      
+              <!--Interfaz para estudiantes-->
+              <?php elseif($_GET['entidad']=='estudiante'): ?>
+      <form action="edit.php?cedula=<?php echo $_GET['cedula']?>&entidad=<?php echo $_GET['entidad'] ?>" method="POST">
+      <div class="form-group">
+        <label for="cedula">Cedula</label>
+        <input name="cedula" type="text" class="form-control" value="<?php echo $cedula; ?>" placeholder="Actualizar cedula" readonly  >
+      </div>
+      <div class="form-group">
+        <label for="nombres">Nombre</label>
+        <input name="nombres" type="text" class="form-control" value="<?php echo $nombres; ?>" placeholder="Actualizar nombre" >
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input name="apellidos" type="text" class="form-control" value="<?php echo $apellidos; ?>" placeholder="Actualizar apellidos" >
+      </div>
+      <div class="form-group">
+        <label for="programa">Programa</label>
+        <input name="programa" type="text" class="form-control" value="<?php echo $programa; ?>" placeholder="Actualizar programa" >
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <input name="estado" type="text" class="form-control" value="<?php echo $estado; ?>" placeholder="Actualizar estados" >
+      </div>
+        
         
       <!--Interfaz para implementos-->
       <?php elseif($_GET['entidad']=='implemento'): ?>
@@ -155,21 +232,6 @@ if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='profesor')){
       </div>
 
 
-              <!--Interfaz para profesores-->
-      <?php elseif($_GET['entidad']=='profesor'): ?>
-      <form action="edit.php?cedula=<?php echo $_GET['cedula']?>&entidad=<?php echo $_GET['entidad'] ?>" method="POST">
-      <div class="form-group">
-        <label for="cedula">Cedula</label>
-        <input name="cedula" type="text" class="form-control" value="<?php echo $cedula; ?>" placeholder="Actualizar cedula" readonly  >
-      </div>
-      <div class="form-group">
-        <label for="nombres">Nombre</label>
-        <input name="nombres" type="text" class="form-control" value="<?php echo $nombres; ?>" placeholder="Actualizar nombre" >
-      </div>
-      <div class="form-group">
-        <label for="apellidos">Apellidos</label>
-        <input name="apellidos" type="text" class="form-control" value="<?php echo $apellidos; ?>" placeholder="Actualizar apellidos" >
-      </div>
 
        
 

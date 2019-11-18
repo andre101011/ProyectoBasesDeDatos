@@ -26,29 +26,64 @@ if (isset($_POST['save_profesor'])) {
   $cedula= $_POST['cedula'];
   $apellidos= $_POST['apellidos'];
 
-  #Verifica si ya hay un profesor con ese codigo
-  $query = "SELECT * FROM profesor WHERE cedula= '$cedula'";
-  $result = mysqli_query($conn, $query);
-  if (mysqli_num_rows($result) == 0) {
+    #Verifica si ya hay un profesor con ese codigo
+    $query = "SELECT * FROM profesor WHERE cedula= '$cedula'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) == 0) {
 
-    $query = "INSERT INTO persona(cedula,nombres,apellidos) VALUES ('$cedula','$nombre','$apellidos')";
-    $result = mysqli_query($conn, $query);
-    if(!$result) {
-      die("Falló la inserción de la persona");
+      #inserta la persona si no existe
+      $query = "INSERT IGNORE INTO persona (cedula, nombres,apellidos) VALUES ('$cedula','$nombre','$apellidos')";
+      $result = mysqli_query($conn, $query);
+      if(!$result) {
+        die("Falló la inserción de la persona");
+      }
+      $query = "INSERT INTO profesor(cedula) VALUES ('$cedula')";
+      $result = mysqli_query($conn, $query);
+      if(!$result) {
+        die("Falló la inserción del profesor");
+      }
+      header('Location: profesores.php');
+    }else{
+      $_SESSION['message'] = 'Ya existe una persona con esta cedula';
+      $_SESSION['message_type'] = 'danger';
+      header('Location: profesores.php');
     }
-    $query = "INSERT INTO profesor(cedula) VALUES ('$cedula')";
-    $result = mysqli_query($conn, $query);
-    if(!$result) {
-      die("Falló la inserción del profesor");
-    }
-    header('Location: profesores.php');
-  }else{
-    $_SESSION['message'] = 'Ya existe un profesor con este código';
-    $_SESSION['message_type'] = 'danger';
-    
-    header('Location: profesores.php');
-  }
 }
+
+
+
+# Si es un estudiante
+if (isset($_POST['save_estudiante'])) {
+  
+  $nombre= $_POST['nombre'];
+  $cedula= $_POST['cedula'];
+  $apellidos= $_POST['apellidos'];
+  $programa= $_POST['programa'];
+  $estado= $_POST['estado'];
+
+    #Verifica si ya hay un estudiante con ese codigo
+    $query = "SELECT * FROM estudiante WHERE cedula= '$cedula'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) == 0) {
+
+      #inserta la persona si no existe
+      $query = "INSERT IGNORE INTO persona (cedula, nombres,apellidos) VALUES ('$cedula','$nombres','$apellidos')";
+      $result = mysqli_query($conn, $query);
+      if(!$result) {
+        die("Falló la inserción de la persona");
+      }
+      $query = "INSERT INTO estudiante(cedula,programa,estado) VALUES ('$cedula','$programa','$estado')";
+      $result = mysqli_query($conn, $query);
+      if(!$result) {
+        die("Falló la inserción del estudiante");
+      }
+      header('Location: estudiantes.php');
+    }else{
+      $_SESSION['message'] = 'Ya existe un estudiante con esta cedula';
+      $_SESSION['message_type'] = 'danger';
+      header('Location: estudiantes.php');
+    }
+  }
 
 
 
