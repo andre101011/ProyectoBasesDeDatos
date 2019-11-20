@@ -1,10 +1,10 @@
-<?php include("db.php"); ?>
 <?php 
-include('login/session.php'); 
-$result=mysqli_query($conn, "select * from users where user_id='$session_id'")or die('Error In Session');
-$row=mysqli_fetch_array($result);
+chdir($_SERVER['DOCUMENT_ROOT']);
+include('ProyectoBasesDeDatos/login/session.php');
+include('ProyectoBasesDeDatos/db.php'); 
+include('ProyectoBasesDeDatos/includes/header.php'); 
 ?>
-<?php include('includes/header.php'); ?>
+
 
 <main class="container p-4">
   <div class="row">
@@ -18,7 +18,9 @@ $row=mysqli_fetch_array($result);
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?php session_unset(); } ?>
+      <?php //session_unset(); 
+      unset( $_SESSION['message']);
+    } ?>
 
          <!-- Formulario de implemento -->
       <div class="card card-body">

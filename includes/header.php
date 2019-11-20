@@ -22,14 +22,20 @@
         <li class="nav-item">
           <a class="nav-link" href="/ProyectoBasesDeDatos/auxiliares.php">Auxiliares</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Estudiantes</a>
         </li>
+        <a class="nav-link" href="/ProyectoBasesDeDatos/profesores.php">Profesores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/ProyectoBasesDeDatos/estudiantes.php">Estudiantes</a>
+        </li>
+        <!--
         <li class="nav-item">
           <a class="nav-link" href="/ProyectoBasesDeDatos/implementos.php">Implementos</a>
         </li>
+        -->
         <a class="nav-link" href="/ProyectoBasesDeDatos/cables.php">Cables</a>
         </li>
+
       </ul>
       
       <ul class="navbar-nav">

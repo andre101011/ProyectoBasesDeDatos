@@ -1,9 +1,8 @@
 <?php 
 chdir($_SERVER['DOCUMENT_ROOT']);
 include('ProyectoBasesDeDatos/login/session.php'); 
-include("ProyectoBasesDeDatos/db.php");  
+include('ProyectoBasesDeDatos/db.php'); 
 include('ProyectoBasesDeDatos/includes/header.php'); 
-
 ?>
 
 
@@ -11,6 +10,7 @@ include('ProyectoBasesDeDatos/includes/header.php');
 body {
   height: 100vh;
   min-height: 500px;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,28 +30,34 @@ body {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?php //session_unset();
+      <?php //session_unset(); 
       unset( $_SESSION['message']);
     } ?>
 
-      <!-- Formulario del auxiliar -->
+      <!-- Formulario del estudiante -->
       <div class="card card-body">
 
         <form action="/ProyectoBasesDeDatos/save.php" method="POST">
           <div class="form-group">
+            <input type="text" name="cedula" class="form-control" placeholder="Cedula"  pattern="[0-9]+"autofocus required title="La cedula solo puede contener numeros">
+          </div>
+          <div class="form-group">
             <input type="text" name="nombre" class="form-control" placeholder="Nombre"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El nombre solo puede contener letras">
           </div>
-          <input type="submit" name="save_auxiliar" class="btn btn-success btn-block" value="Guardar">
+          <div class="form-group">
+            <input type="text" name="apellidos" class="form-control" placeholder="Apellidos"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El apellido solo puede contener letras">
+          </div>
+          <div class="form-group">
+            <input type="text" name="programa" class="form-control" placeholder="Programa"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El programa solo puede contener letras">
+          </div>
+          <div class="form-group">
+            <input type="text" name="estado" class="form-control" placeholder="Estado"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"autofocus required title="El estado solo puede contener letras">
+          </div>
+          <input type="submit" name="save_estudiante" class="btn btn-success btn-block" value="Guardar">
         </form>
 
       </div>
-        <div class="card card-body" style="margin-top: 20px">
-          <!--Botón de graficar-->
-          
-          <a href="/ProyectoBasesDeDatos/graph/index.php?entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
-          <i class="fas fa-chart-line"></i>
-          </a>
-        </div>
+
       </div>
 
     <div class="col-md-8">
@@ -59,30 +65,32 @@ body {
       <table class="table table-bordered table-striped" id="myTable">
         <thead>
           <tr>
-            <th>Iniciales</th>
-            <th>Nombre</th>
-            <th>Acción</th>
+            <th>Cedula</th>
+            <th>Programa</th>
+            <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
 
 
           <?php
-          $query = "SELECT * FROM auxiliar";
-          $result_auxiliares = mysqli_query($conn, $query);    
+          $query = "SELECT * FROM estudiante est, persona per WHERE est.cedula=per.cedula";
+          $result_estudiantes = mysqli_query($conn, $query);    
 
-          while($row = mysqli_fetch_assoc($result_auxiliares)) { ?>
+          while($row = mysqli_fetch_assoc($result_estudiantes)) { ?>
           <tr>
-          <td><?php echo $row['iniciales']; ?></td>
-            <td><?php echo $row['nombre']; ?></td>
+            <td><?php echo $row['cedula']; ?></td>
+            <td><?php echo $row['programa']; ?></td>
+            <td><?php echo $row['estado']; ?></td>
             <td>
 
               <!--Botón de editar-->
-              <a href="/ProyectoBasesDeDatos/edit.php?id=<?php echo $row['id']?>& entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
+              <a href="/ProyectoBasesDeDatos/edit.php?cedula=<?php echo $row['cedula']?>& entidad=<?php echo 'estudiante'?>" class="btn btn-secondary">
                 <i class="fas fa-marker"></i>
               </a>
               <!--Botón de eliminar-->
-              <a href="/ProyectoBasesDeDatos/delete.php?id=<?php echo $row['id'] ?>& entidad=<?php echo 'auxiliar' ?>" class="btn btn-danger">
+              <a href="/ProyectoBasesDeDatos/delete.php?cedula=<?php echo $row['cedula'] ?>& entidad=<?php echo 'estudiante'?>" class="btn btn-danger">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
