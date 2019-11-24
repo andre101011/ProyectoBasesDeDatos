@@ -5,9 +5,9 @@
 	/* Database connection settings */
 	$host = 'localhost';
 	$user = 'root';
-	$pass = 'root';
+	$pass = 'jhon0223';
 	$db = 'proyectobd';
-	$conn = mysqli_connect("localhost","root","root","proyectobd")or die($conn->error);
+	$conn = mysqli_connect("localhost","root","jhon0223","proyectobd")or die($conn->error);
 
 	$year = '';
 	$profit = '';

@@ -18,6 +18,18 @@ if (isset($_POST['save_auxiliar'])) {
   header('Location: auxiliares.php');
 }
 
+# Si es una sala
+if (isset($_POST['save_sala'])) {
+
+  $codigo= $_POST['codigo'];
+  $query = "INSERT INTO sala(codigo) VALUES ('$codigo')";
+  $result = mysqli_query($conn, $query);
+  if(!$result) {
+    die("Falló la inserción de la sala");
+  }
+  header('Location: sala.php');
+}
+
 
 # Si es un profesor
 if (isset($_POST['save_profesor'])) {
@@ -147,6 +159,43 @@ if (isset($_POST['save_cable_red'])) {
     $_SESSION['message'] = 'Ya existe un implemento con este código';
     $_SESSION['message_type'] = 'danger';
     header('Location: cables.php');
+  }
+}
+
+# Si es una mac
+if (isset($_POST['save_mac'])) {
+  $codigo= $_POST['codigo'];
+  $Sala_codigo= $_POST['sala_codigo'];
+  $observacion = $_POST['observacion'];
+  $Modelo = $_POST{'modelo'};
+
+  #Verifica si ya hay un implemento con ese codigo
+  $query = "SELECT * FROM implemento WHERE codigo= '$codigo'";
+  $result = mysqli_query($conn, $query);
+  if (mysqli_num_rows($result) == 0) {
+
+
+    #Inserta el nuevo implemento
+    $query = "INSERT INTO implemento (codigo, observacion) VALUES ('$codigo', '$observacion')";
+    $result = mysqli_query($conn, $query);
+    if(!$result) {
+    print $result;
+    die("Falló la inserción del implemento");
+    }
+    #Inserta el nuevo cable
+    $query = "INSERT INTO mac (codigo, sala_codigo, modelo) VALUES ('$codigo', '$Sala_codigo', '$Modelo')";
+    $result = mysqli_query($conn, $query);
+    if(!$result) {
+      print $result;
+      die("Falló la inserción de la mac");
+    }
+    $_SESSION['message'] = 'Mac guardada exitosamente';
+    $_SESSION['message_type'] = 'success';
+    header('Location: mac.php');
+  }else{
+    $_SESSION['message'] = 'Ya existe un implemento con este código';
+    $_SESSION['message_type'] = 'danger';
+    header('Location: mac.php');
   }
 }
 

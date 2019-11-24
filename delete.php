@@ -19,6 +19,21 @@ if  (isset($_GET["id"]) AND ($_GET["entidad"]=="auxiliar")){
   header('Location: auxiliares.php');
 }
 
+# Si es una sala
+if  (isset($_GET["codigo"]) AND ($_GET["entidad"]=="sala")){
+  $codigo= $_GET['codigo'];
+  $entidad=$_GET['entidad'];
+ print "codigo ". $codigo . "  ";
+  $query = "DELETE FROM sala WHERE codigo = ('$codigo')";
+  $result = mysqli_query($conn, $query);
+  if(!$result) {
+    die("Query Failed.");
+  }
+  $_SESSION['message'] = 'Sala con codigo '. $codigo . ' eliminada exitosamente';
+  $_SESSION['message_type'] = 'danger';
+  header('Location: sala.php');
+}
+
 # Si es un profesor
 if  (isset($_GET["cedula"]) AND ($_GET["entidad"]=="profesor")){
   $cedula = $_GET['cedula'];
