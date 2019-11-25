@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2019 a las 04:10:23
+-- Tiempo de generación: 25-11-2019 a las 02:34:45
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.1.33
 
@@ -81,7 +81,7 @@ CREATE TABLE `cable_red` (
 --
 
 INSERT INTO `cable_red` (`codigo`, `categoria`) VALUES
-('1', '7');
+('11', '9');
 
 -- --------------------------------------------------------
 
@@ -92,13 +92,20 @@ INSERT INTO `cable_red` (`codigo`, `categoria`) VALUES
 CREATE TABLE `clase` (
   `periodo_academico` varchar(20) NOT NULL,
   `dia_semana` varchar(20) NOT NULL,
-  `hora_inicio` datetime NOT NULL,
-  `hora_fin` datetime NOT NULL,
-  `codigo` double NOT NULL,
-  `Profesor_cedula` varchar(30) NOT NULL,
-  `Materia_codigo` varchar(30) NOT NULL,
-  `Sala_codigo` varchar(20) NOT NULL
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `profesor_cedula` varchar(30) NOT NULL,
+  `materia_codigo` varchar(30) NOT NULL,
+  `sala_codigo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `clase`
+--
+
+INSERT INTO `clase` (`periodo_academico`, `dia_semana`, `hora_inicio`, `hora_fin`, `codigo`, `profesor_cedula`, `materia_codigo`, `sala_codigo`) VALUES
+('20191', 'Lunes', '04:00:00', '06:00:00', 1, '10315120', '1', 'A');
 
 -- --------------------------------------------------------
 
@@ -112,7 +119,7 @@ CREATE TABLE `computador` (
   `cpu` varchar(50) DEFAULT NULL,
   `marca` varchar(50) DEFAULT NULL,
   `codigo` varchar(30) NOT NULL,
-  `Sala_codigo` varchar(20) NOT NULL
+  `sala_codigo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -122,12 +129,19 @@ CREATE TABLE `computador` (
 --
 
 CREATE TABLE `entrada_minuta` (
-  `Fecha_entrada` datetime(6) NOT NULL,
+  `fecha_entrada` datetime(6) NOT NULL,
   `fecha_salida` datetime(6) NOT NULL,
   `id` double NOT NULL,
   `observacion` varchar(500) DEFAULT NULL,
   `Auxiliar_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `entrada_minuta`
+--
+
+INSERT INTO `entrada_minuta` (`fecha_entrada`, `fecha_salida`, `id`, `observacion`, `Auxiliar_id`) VALUES
+('2019-11-24 00:00:00.000000', '2019-11-24 07:14:20.000000', 1, 'No hizo nada', 13);
 
 -- --------------------------------------------------------
 
@@ -140,6 +154,37 @@ CREATE TABLE `estudiante` (
   `estado` varchar(30) NOT NULL,
   `cedula` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`programa`, `estado`, `cedula`) VALUES
+('Ing Civil', 'Activo', '014385215'),
+('Ing Sistemas', 'Activo', '10315120'),
+('Ing Civil', 'Activo', '15623511'),
+('Ing Sistemas', 'Activo', '15623516'),
+('Ing Sistemas', 'Activo', '18438331'),
+('Ing Civil', 'Activo', '184384422'),
+('Ing Civil', 'Activo', '18438446'),
+('Ing Sistemas', 'Activo', '184385215'),
+('Ing Sistemas', 'Activo', '194382422'),
+('Ing Sistemas', 'Activo', '22438406'),
+('Ing Electrónica', 'Activo', '25315120'),
+('Ing Electrónica', 'Activo', '25315199'),
+('Ing Electrónica', 'Activo', '25356656'),
+('Ing Electrónica', 'Inactivo', '25356684'),
+('Ing Electrónica', 'Activo', '25356686'),
+('Ing Electrónica', 'Inactivo', '2536156'),
+('Ing Sistemas', 'Inactivo', '32435161'),
+('Ing Sistemas', 'Activo', '33356156'),
+('Ing Civil ', 'Inactivo', '35154435'),
+('Ing Sistemas', 'Inactivo', '37658341'),
+('Ing Civil', 'Activo', '45438331'),
+('Ing Sistemas', 'Activo', '56623516'),
+('Ing Civil', 'Inactivo', '613351153'),
+('Ing Civil', 'Inactivo', '618644841'),
+('Ing Civil', 'Activo', '66315199');
 
 -- --------------------------------------------------------
 
@@ -157,11 +202,12 @@ CREATE TABLE `implemento` (
 --
 
 INSERT INTO `implemento` (`observacion`, `codigo`) VALUES
-('MAC 1', '1'),
-('PC 11', '17'),
-('PC 12', '18'),
-('MAC 2', '2'),
-('PC 18', '21');
+('Dañado', '11'),
+('', '16'),
+('Con rayones', '17'),
+('En buen estado', '18'),
+('Excelente', '2'),
+('En buen estado', '21');
 
 -- --------------------------------------------------------
 
@@ -170,10 +216,19 @@ INSERT INTO `implemento` (`observacion`, `codigo`) VALUES
 --
 
 CREATE TABLE `mac` (
-  `Modelo` varchar(50) DEFAULT NULL,
+  `modelo` varchar(50) DEFAULT NULL,
   `codigo` varchar(30) NOT NULL,
-  `Sala_codigo` varchar(20) NOT NULL
+  `sala_codigo` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mac`
+--
+
+INSERT INTO `mac` (`modelo`, `codigo`, `sala_codigo`) VALUES
+('2019', '11', 'C'),
+('2017', '17', 'B'),
+('2018', '21', 'B');
 
 -- --------------------------------------------------------
 
@@ -186,6 +241,13 @@ CREATE TABLE `materia` (
   `codigo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`nombre`, `codigo`) VALUES
+('Bases', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -193,9 +255,16 @@ CREATE TABLE `materia` (
 --
 
 CREATE TABLE `materia_profesor` (
-  `Profesor_cedula` varchar(30) NOT NULL,
-  `Materia_codigo` varchar(30) NOT NULL
+  `profesor_cedula` varchar(30) NOT NULL,
+  `materia_codigo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `materia_profesor`
+--
+
+INSERT INTO `materia_profesor` (`profesor_cedula`, `materia_codigo`) VALUES
+('10315120', '1');
 
 -- --------------------------------------------------------
 
@@ -209,6 +278,53 @@ CREATE TABLE `persona` (
   `apellidos` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`cedula`, `nombres`, `apellidos`) VALUES
+('014385215', 'Juan Felipe', 'Rodríguez'),
+('014666215', 'Juan Andrés', 'Rasca'),
+('10315120', 'Jairo Andrés', 'Bucaramanga'),
+('10366620', 'Mauricio', 'Cartagena'),
+('15623511', 'Santiago', 'Montañéz'),
+('15623516', 'Samanta', 'Montañas'),
+('1562666', 'Carlos José', 'Santamaría'),
+('15626661', 'Carlos Alfonso', 'Montana'),
+('18438331', 'Mariana', 'Romero'),
+('184384422', 'Daniel', 'Alvarez'),
+('18438446', 'Daniela', 'Alvarez'),
+('184385215', 'Dany', 'Cuadros'),
+('184666215', 'Luis Angel', 'Arboleda'),
+('184666422', 'Roberto Carlos', 'Bolivar'),
+('18666331', 'Luis Miguel', 'Cantante'),
+('18666546', 'Miguel Angel', 'Pintor'),
+('194382422', 'Nelson Alfonso', 'Pinzón'),
+('196662422', 'Mauricio', 'Rincón'),
+('22438406', 'Alvaro Sebastian', 'Yuca'),
+('25315120', 'Andrés', 'Roca'),
+('25315199', 'Luis Miguel', 'Cardona'),
+('25315666', 'Jhon James', 'Bonilla'),
+('25356656', 'Camila', 'Grisales'),
+('25356684', 'Mauricio', 'Grisales'),
+('25356686', 'Manuela', 'Grisales'),
+('2536156', 'Daniel', 'Casas'),
+('25366686', 'Jessica', 'Grisales'),
+('26666686', 'Oscar', 'Figueroa'),
+('32435161', 'Manuel', 'Casalles'),
+('33356156', 'Camila', 'Paez'),
+('35154435', 'Carlos ', 'Rosas'),
+('37658341', 'Jhonatan', 'Dominguez'),
+('45438331', 'Diana María', 'Lopez'),
+('56623516', 'Maria Estefanía ', 'Pulgarín'),
+('613351153', 'Manuel', 'Morales'),
+('618644841', 'Daniela', 'Pumarejo'),
+('66315199', 'Miguel Alfonso', 'Jhonson'),
+('66615199', 'Daniel Felipe', 'Cardona'),
+('66623511', 'Juana Melissa', 'Nuñez'),
+('66638406', 'Andrés Felipe', 'Ospina'),
+('66656684', 'Dana María', 'Cañón');
+
 -- --------------------------------------------------------
 
 --
@@ -220,9 +336,16 @@ CREATE TABLE `prestamo` (
   `fecha_prestamo` datetime(6) DEFAULT NULL,
   `id` double NOT NULL,
   `observacion` varchar(500) DEFAULT NULL,
-  `Auxiliar_id` int(11) NOT NULL,
-  `Persona_cedula` varchar(30) NOT NULL
+  `auxiliar_id` int(11) NOT NULL,
+  `persona_cedula` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `prestamo`
+--
+
+INSERT INTO `prestamo` (`fecha_devolucion`, `fecha_prestamo`, `id`, `observacion`, `auxiliar_id`, `persona_cedula`) VALUES
+('2019-11-24 00:00:00.000000', '2019-11-25 00:00:00.000000', 1, '', 13, '10366620');
 
 -- --------------------------------------------------------
 
@@ -231,9 +354,16 @@ CREATE TABLE `prestamo` (
 --
 
 CREATE TABLE `prestamo_implemento` (
-  `Prestamo_id` double NOT NULL,
-  `Implemento_codigo` varchar(30) NOT NULL
+  `prestamo_id` double NOT NULL,
+  `implemento_codigo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `prestamo_implemento`
+--
+
+INSERT INTO `prestamo_implemento` (`prestamo_id`, `implemento_codigo`) VALUES
+(1, '11');
 
 -- --------------------------------------------------------
 
@@ -245,6 +375,17 @@ CREATE TABLE `profesor` (
   `cedula` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`cedula`) VALUES
+('10315120'),
+('15623511'),
+('15623516'),
+('18438331'),
+('184384422');
+
 -- --------------------------------------------------------
 
 --
@@ -254,6 +395,16 @@ CREATE TABLE `profesor` (
 CREATE TABLE `sala` (
   `codigo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `sala`
+--
+
+INSERT INTO `sala` (`codigo`) VALUES
+('A'),
+('B'),
+('C'),
+('D');
 
 -- --------------------------------------------------------
 
@@ -267,7 +418,7 @@ CREATE TABLE `turno` (
   `hora_fin` datetime NOT NULL,
   `periodo_academico` varchar(30) NOT NULL,
   `dia` varchar(20) NOT NULL,
-  `Auxiliar_id` int(11) NOT NULL
+  `auxiliar_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -312,15 +463,15 @@ ALTER TABLE `cable_red`
 --
 ALTER TABLE `clase`
   ADD PRIMARY KEY (`codigo`),
-  ADD KEY `Clase_Materia_Profesor_FK` (`Profesor_cedula`,`Materia_codigo`),
-  ADD KEY `Clase_Sala_FK` (`Sala_codigo`);
+  ADD KEY `Clase_Materia_Profesor_FK` (`profesor_cedula`,`materia_codigo`),
+  ADD KEY `Clase_Sala_FK` (`sala_codigo`);
 
 --
 -- Indices de la tabla `computador`
 --
 ALTER TABLE `computador`
   ADD PRIMARY KEY (`codigo`),
-  ADD KEY `Computador_Sala_FK` (`Sala_codigo`);
+  ADD KEY `Computador_Sala_FK` (`sala_codigo`);
 
 --
 -- Indices de la tabla `entrada_minuta`
@@ -346,7 +497,7 @@ ALTER TABLE `implemento`
 --
 ALTER TABLE `mac`
   ADD PRIMARY KEY (`codigo`),
-  ADD KEY `Mac_Sala_FK` (`Sala_codigo`);
+  ADD KEY `Mac_Sala_FK` (`sala_codigo`) USING BTREE;
 
 --
 -- Indices de la tabla `materia`
@@ -358,8 +509,8 @@ ALTER TABLE `materia`
 -- Indices de la tabla `materia_profesor`
 --
 ALTER TABLE `materia_profesor`
-  ADD PRIMARY KEY (`Profesor_cedula`,`Materia_codigo`),
-  ADD KEY `Materia_FK` (`Materia_codigo`);
+  ADD PRIMARY KEY (`profesor_cedula`,`materia_codigo`),
+  ADD KEY `Materia_FK` (`materia_codigo`);
 
 --
 -- Indices de la tabla `persona`
@@ -372,15 +523,15 @@ ALTER TABLE `persona`
 --
 ALTER TABLE `prestamo`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Prestamo_Auxiliar_FK` (`Auxiliar_id`),
-  ADD KEY `Prestamo_Persona_FK` (`Persona_cedula`);
+  ADD KEY `Prestamo_Auxiliar_FK` (`auxiliar_id`),
+  ADD KEY `Prestamo_Persona_FK` (`persona_cedula`);
 
 --
 -- Indices de la tabla `prestamo_implemento`
 --
 ALTER TABLE `prestamo_implemento`
-  ADD PRIMARY KEY (`Prestamo_id`,`Implemento_codigo`),
-  ADD KEY `Implemento_FK` (`Implemento_codigo`);
+  ADD PRIMARY KEY (`prestamo_id`,`implemento_codigo`),
+  ADD KEY `Implemento_FK` (`implemento_codigo`);
 
 --
 -- Indices de la tabla `profesor`
@@ -399,7 +550,7 @@ ALTER TABLE `sala`
 --
 ALTER TABLE `turno`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Turno_Auxiliar_FK` (`Auxiliar_id`);
+  ADD KEY `Turno_Auxiliar_FK` (`auxiliar_id`);
 
 --
 -- Indices de la tabla `users`
@@ -415,7 +566,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `auxiliar`
 --
 ALTER TABLE `auxiliar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `clase`
+--
+ALTER TABLE `clase`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -437,7 +594,7 @@ ALTER TABLE `cable_red`
 -- Filtros para la tabla `clase`
 --
 ALTER TABLE `clase`
-  ADD CONSTRAINT `Clase_Materia_Profesor_FK` FOREIGN KEY (`Profesor_cedula`,`Materia_codigo`) REFERENCES `materia_profesor` (`Profesor_cedula`, `Materia_codigo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Clase_Materia_Profesor_FK` FOREIGN KEY (`Profesor_cedula`,`Materia_codigo`) REFERENCES `materia_profesor` (`profesor_cedula`, `materia_codigo`) ON DELETE CASCADE,
   ADD CONSTRAINT `Clase_Sala_FK` FOREIGN KEY (`Sala_codigo`) REFERENCES `sala` (`codigo`);
 
 --
@@ -464,14 +621,14 @@ ALTER TABLE `estudiante`
 --
 ALTER TABLE `mac`
   ADD CONSTRAINT `Mac_Implemento_FK` FOREIGN KEY (`codigo`) REFERENCES `implemento` (`codigo`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Mac_Sala_FK` FOREIGN KEY (`Sala_codigo`) REFERENCES `sala` (`codigo`);
+  ADD CONSTRAINT `Mac_Sala_FK` FOREIGN KEY (`sala_codigo`) REFERENCES `sala` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `materia_profesor`
 --
 ALTER TABLE `materia_profesor`
-  ADD CONSTRAINT `Materia_FK` FOREIGN KEY (`Materia_codigo`) REFERENCES `materia` (`codigo`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Profesor_FK` FOREIGN KEY (`Profesor_cedula`) REFERENCES `profesor` (`cedula`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Materia_FK` FOREIGN KEY (`materia_codigo`) REFERENCES `materia` (`codigo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Profesor_FK` FOREIGN KEY (`profesor_cedula`) REFERENCES `profesor` (`cedula`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `prestamo`

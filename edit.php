@@ -27,7 +27,7 @@ if  (isset($_GET["id"]) AND ($_GET['entidad']=='auxiliar')){
     mysqli_query($conn, $query);
     $_SESSION['message'] = 'Auxiliar con ID: '. $id .' actualizado exitosamente';
     $_SESSION['message_type'] = 'warning';
-    header('Location: auxiliares.php');
+    header('Location: auxiliar.php');
   }
 }
 
@@ -54,7 +54,7 @@ if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='profesor')){
     //mysqli_query($conn, $query);
     $_SESSION['message'] = 'Profesor con cedula: '. $cedula .' actualizado exitosamente';
     $_SESSION['message_type'] = 'warning';
-    header('Location: profesores.php');
+    header('Location: profesor.php');
   }
 }
 
@@ -86,7 +86,7 @@ if  (isset($_GET["cedula"]) AND ($_GET['entidad']=='estudiante')){
     mysqli_query($conn, $query);
     $_SESSION['message'] = 'estudiante con cedula: '. $cedula .' actualizado exitosamente';
     $_SESSION['message_type'] = 'warning';
-    header('Location: estudiantes.php');
+    header('Location: estudiante.php');
   }
 }
 
@@ -110,7 +110,7 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='implemento')){
     mysqli_query($conn, $query);
     $_SESSION['message'] = 'Implemento con codigo: '. $codigo .' actualizado exitosamente';
     $_SESSION['message_type'] = 'warning';
-    header('Location: implementos.php');
+    header('Location: implemento.php');
   }
 }
 
@@ -137,13 +137,46 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='cable_red')){
     mysqli_query($conn, $query);
     $_SESSION['message'] = 'Cable de red con codigo: '. $codigo .' actualizado exitosamente';
     $_SESSION['message_type'] = 'warning';
-    header('Location: cables.php');
+    header('Location: cable_red.php');
   }
 }
 
 
-?>
 
+//Codigo para editar mac
+if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='mac')){
+  $codigo = $_GET['codigo'];
+  $entidad =$_GET['entidad'];
+  $query = "SELECT * FROM implemento im, mac WHERE im.codigo=mac.codigo AND mac.codigo='$codigo'";
+  $result = mysqli_query($conn, $query);
+  $modelo="ggg";
+
+  if (mysqli_num_rows($result) == 1) {
+      $row = mysqli_fetch_array($result);
+      $observacion = $row['observacion'];
+      $sala_codigo = $row['sala_codigo'];
+      $modelo = $row['modelo'];
+    }
+
+  if (isset($_POST['update_mac'])) {
+    $codigo = $_GET['codigo'];
+    $sala_codigo = $_POST['sala_codigo'];
+    $observacion = $_POST['observacion'];
+    $modelo = $_POST['modelo'];
+
+    $query = "UPDATE implemento set observacion='$observacion' WHERE codigo='$codigo'";
+    mysqli_query($conn, $query);
+    $query = "UPDATE mac set modelo='$modelo',sala_codigo='$sala_codigo' WHERE codigo='$codigo'";
+    mysqli_query($conn, $query);
+    $_SESSION['message'] = 'Mac con codigo: '. $codigo .' actualizado exitosamente';
+    $_SESSION['message_type'] = 'warning';
+    header('Location: mac.php');
+  }
+}
+
+
+
+?>
 <div class="container p-4">
   <div class="row">
     <div class="col-md-4 mx-auto">
@@ -232,9 +265,27 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='cable_red')){
       </div>
 
 
-
-       
-
+      <!--Interfaz para mac-->
+      <?php elseif($_GET['entidad']=='mac'): ?>
+      <form action="edit.php?codigo=<?php echo $_GET['codigo']?>&entidad=<?php echo $_GET['entidad'] ?>" method="POST">
+      <div class="form-group">
+        <label for="codigo">Código</label>
+        <input name="codigo" type="text" class="form-control" value="<?php echo $codigo; ?>" placeholder="Actualizar codigo" readonly  >
+      </div>
+      <div class="form-group">
+        <label for="sala_codigo">Sala</label>
+        <select id="sala_codigo" name="sala_codigo" class="form-control" >
+          <option value="#">Seleccione una sala</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="observacion">Observacion</label>
+        <input name="observacion" type="text" class="form-control" value="<?php echo $observacion; ?>" placeholder="Actualizar categoría" >
+      </div>
+      <div class="form-group">
+        <label for="modelo">Modelo</label>
+        <input name="modelo" type="text" class="form-control" value="<?php echo $modelo; ?>" placeholder="Actualizar modelo" >
+      </div>
 
       <?php endif?>
 
@@ -247,3 +298,15 @@ if  (isset($_GET["codigo"]) AND ($_GET['entidad']=='cable_red')){
   </div>
 </div>
 <?php include('includes/footer.php'); ?>
+
+
+<script>
+$( document ).ready(function() {
+  $.ajax({
+    method: "GET",
+    url: "getSala.php"
+  }).done(function( data ) {
+    $( "#sala_codigo" ).append( data );
+  });
+});
+</script>

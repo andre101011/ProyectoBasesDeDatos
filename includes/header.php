@@ -20,18 +20,18 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/ProyectoBasesDeDatos/auxiliares.php">Auxiliares</a>
+          <a class="nav-link" href="/ProyectoBasesDeDatos/auxiliar.php">Auxiliares</a>
         </li>
         </li>
-        <a class="nav-link" href="/ProyectoBasesDeDatos/profesores.php">Profesores</a>
+        <a class="nav-link" href="/ProyectoBasesDeDatos/profesor.php">Profesores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/ProyectoBasesDeDatos/estudiantes.php">Estudiantes</a>
+          <a class="nav-link" href="/ProyectoBasesDeDatos/estudiante.php">Estudiantes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/ProyectoBasesDeDatos/sala.php">Sala</a>
         </li>
-          <a class="nav-link" href="/ProyectoBasesDeDatos/cables.php">Cables</a>
+          <a class="nav-link" href="/ProyectoBasesDeDatos/cable_red.php">Cables</a>
         </li>
         </li>
           <a class="nav-link" href="/ProyectoBasesDeDatos/mac.php">Mac</a>
@@ -46,10 +46,12 @@
       </ul>
       
       <ul class="navbar-nav">
+      
         <form class="form-inline">
           <!--Barra de busqueda-->
           <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por ID" aria-label="Search" id="myInput">
         </form>
+        
       </ul>
 
 

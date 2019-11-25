@@ -15,7 +15,7 @@ if (isset($_POST['save_auxiliar'])) {
   if(!$result) {
     die("Falló la inserción del auxiliar");
   }
-  header('Location: auxiliares.php');
+  header('Location: auxiliar.php');
 }
 
 # Si es una sala
@@ -54,11 +54,11 @@ if (isset($_POST['save_profesor'])) {
       if(!$result) {
         die("Falló la inserción del profesor");
       }
-      header('Location: profesores.php');
+      header('Location: profesor.php');
     }else{
       $_SESSION['message'] = 'Ya existe una persona con esta cedula';
       $_SESSION['message_type'] = 'danger';
-      header('Location: profesores.php');
+      header('Location: profesor.php');
     }
 }
 
@@ -79,7 +79,7 @@ if (isset($_POST['save_estudiante'])) {
     if (mysqli_num_rows($result) == 0) {
 
       #inserta la persona si no existe
-      $query = "INSERT IGNORE INTO persona (cedula, nombres,apellidos) VALUES ('$cedula','$nombres','$apellidos')";
+      $query = "INSERT IGNORE INTO persona (cedula, nombres,apellidos) VALUES ('$cedula','$nombre','$apellidos')";
       $result = mysqli_query($conn, $query);
       if(!$result) {
         die("Falló la inserción de la persona");
@@ -89,11 +89,11 @@ if (isset($_POST['save_estudiante'])) {
       if(!$result) {
         die("Falló la inserción del estudiante");
       }
-      header('Location: estudiantes.php');
+      header('Location: estudiante.php');
     }else{
       $_SESSION['message'] = 'Ya existe un estudiante con esta cedula';
       $_SESSION['message_type'] = 'danger';
-      header('Location: estudiantes.php');
+      header('Location: estudiante.php');
     }
   }
 
@@ -117,11 +117,11 @@ if (isset($_POST['save_implemento'])) {
     }
     $_SESSION['message'] = 'Implemento guardado exitosamente';
     $_SESSION['message_type'] = 'success';
-    header('Location: implementos.php');
+    header('Location: implemento.php');
   }else{
     $_SESSION['message'] = 'Ya existe un implemento con este código';
     $_SESSION['message_type'] = 'danger';
-    header('Location: implementos.php');
+    header('Location: implemento.php');
   }
 }
 
@@ -154,20 +154,20 @@ if (isset($_POST['save_cable_red'])) {
     }
     $_SESSION['message'] = 'Cable guardado exitosamente';
     $_SESSION['message_type'] = 'success';
-    header('Location: cables.php');
+    header('Location: cable_red.php');
   }else{
     $_SESSION['message'] = 'Ya existe un implemento con este código';
     $_SESSION['message_type'] = 'danger';
-    header('Location: cables.php');
+    header('Location: cable_red.php');
   }
 }
 
 # Si es una mac
 if (isset($_POST['save_mac'])) {
   $codigo= $_POST['codigo'];
-  $Sala_codigo= $_POST['sala_codigo'];
+  $sala_codigo= $_POST['sala_codigo'];
   $observacion = $_POST['observacion'];
-  $Modelo = $_POST{'modelo'};
+  $modelo = $_POST{'modelo'};
 
   #Verifica si ya hay un implemento con ese codigo
   $query = "SELECT * FROM implemento WHERE codigo= '$codigo'";
@@ -182,8 +182,8 @@ if (isset($_POST['save_mac'])) {
     print $result;
     die("Falló la inserción del implemento");
     }
-    #Inserta el nuevo cable
-    $query = "INSERT INTO mac (codigo, sala_codigo, modelo) VALUES ('$codigo', '$Sala_codigo', '$Modelo')";
+    #Inserta el nuevo mac
+    $query = "INSERT INTO mac (codigo, sala_codigo, modelo) VALUES ('$codigo', '$sala_codigo', '$modelo')";
     $result = mysqli_query($conn, $query);
     if(!$result) {
       print $result;

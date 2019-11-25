@@ -35,27 +35,38 @@ body {
     } ?>
 
       <!-- Formulario de la sala -->
-      <div class="card card-body">
-
-        <form action="/ProyectoBasesDeDatos/save.php" method="POST">
-          <div class="form-group">
-            <input type="text" name="codigo" class="form-control" placeholder="Codigo" autofocus>
-          </div>
-          <input type="submit" name="save_sala" class="btn btn-success btn-block" value="Guardar">
-        </form>
-
-      </div>
-        <div class="card card-body" style="margin-top: 20px">
-          <!--Botón de graficar-->
-          
-          <a href="/ProyectoBasesDeDatos/graph/index.php?entidad=<?php echo 'sala'?>" class="btn btn-secondary">
-          <i class="fas fa-chart-line"></i>
-          </a>
+    <div class="card card-body">
+      <form action="/ProyectoBasesDeDatos/save.php" method="POST">
+        <div class="form-group">
+          <input type="text" name="codigo" class="form-control" placeholder="Codigo" autofocus>
         </div>
+        <input type="submit" name="save_sala" class="btn btn-success btn-block" value="Guardar">
+      </form>
       </div>
+
+      <div class="card card-body" style="margin-top: 20px">
+
+     <!--Botón de reporte-->
+      <a href="/ProyectoBasesDeDatos/pdf/reporte_sala.php?" class="btn btn-secondary">
+        <i class="far fa-file-pdf"></i>
+        Listar codigos de salas donde haya clase los lunes
+      </a>
+
+      <!--Botón de reporte-->
+      <a href="/ProyectoBasesDeDatos/pdf/reporte_sala_2.php?" class="btn btn-light">
+      <i class="far fa-file-pdf"></i>
+      Listado de MACs por sala
+      </a>
+
+      <a href="/ProyectoBasesDeDatos/pdf/reporte_sala_3.php?" class="btn btn-secondary">
+      <i class="far fa-file-pdf"></i>
+      Conteo de implementos por sala
+      </a>
+
+      </div>
+    </div>
 
     <div class="col-md-8">
-
       <table class="table table-bordered table-striped" id="myTable">
         <thead>
           <tr>
@@ -64,7 +75,6 @@ body {
           </tr>
         </thead>
         <tbody>
-
 
           <?php
           $query = "SELECT * FROM sala";
@@ -109,9 +119,6 @@ function myFunction() {
   }
 }
 </script>
-
-
-
 </main>
 
 <?php include('includes/footer.php'); ?>

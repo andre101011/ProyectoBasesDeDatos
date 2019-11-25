@@ -40,7 +40,7 @@
 					if ($num_row > 0) 
 						{			
 							$_SESSION['user_id']=$row['user_id'];
-							header('location:/ProyectoBasesDeDatos/auxiliares.php');
+							header('location:/ProyectoBasesDeDatos/auxiliar.php');
 						}
 					else
 						{	

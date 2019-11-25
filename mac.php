@@ -51,7 +51,7 @@ include('ProyectoBasesDeDatos/includes/header.php');
         <thead>
           <tr>
             <th>Codigo</th>
-            <th>Sala_codigo</th>
+            <th>Código Sala</th>
             <th>Observación</th>
             <th>Modelo</th>
             <th>Acción</th>
@@ -66,9 +66,9 @@ include('ProyectoBasesDeDatos/includes/header.php');
           while($row = mysqli_fetch_assoc($result_mac)) { ?>
           <tr>
             <td><?php echo $row['codigo']; ?></td>
-            <td><?php echo $row['Sala_codigo']; ?></td>
+            <td><?php echo $row['sala_codigo']; ?></td>
             <td><?php echo $row['observacion']; ?></td>
-            <td><?php echo $row['Modelo']; ?></td>
+            <td><?php echo $row['modelo']; ?></td>
             <td>
               <!--Botón de editar-->
               <a href="edit.php?codigo=<?php echo $row['codigo']?> & entidad=<?php echo 'mac'?>" class="btn btn-secondary">
@@ -86,9 +86,9 @@ include('ProyectoBasesDeDatos/includes/header.php');
     </div>
   </div>
 <?php include('includes/footer.php'); ?>
-<!--Javascript para barra de busqueda-->
-<script>
 
+
+<script>
 $( document ).ready(function() {
   $.ajax({
     method: "GET",
@@ -97,7 +97,10 @@ $( document ).ready(function() {
     $( "#sala_codigo" ).append( data );
   });
 });
+</script>
 
+<!--Javascript para barra de busqueda-->
+<script>
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");

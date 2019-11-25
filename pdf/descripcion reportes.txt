@@ -1,0 +1,12 @@
+aux 1 simple
+aux 2 intermedio
+
+sala 1 simple
+sala 2 intermedio
+sala 3 avanzado
+
+estudiantes 1 simple
+estudiantes 2 intermedio
+estudiantes 3 avanzado
+
+Falta una intermedia y una avanzada
