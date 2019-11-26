@@ -64,6 +64,11 @@ include('ProyectoBasesDeDatos/includes/header.php');
         Listado de estudiantes que también son profesores
         </a>
 
+        <a href="/ProyectoBasesDeDatos/pdf/reporte_estudiantes_4.php?" class="btn btn-light">
+        <i class="far fa-file-pdf"></i>
+        Listado por nombre y id los primeros 5 estudiantes que pidieron MACs
+        </a>
+
         </div>
       </div>
 

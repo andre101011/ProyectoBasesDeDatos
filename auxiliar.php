@@ -34,12 +34,6 @@ include('ProyectoBasesDeDatos/includes/header.php');
       </div>
         <div class="card card-body" style="margin-top: 20px">
 
-          <!--Botón de graficar-->
-          <a href="/ProyectoBasesDeDatos/graph/index.php?entidad=<?php echo 'auxiliar'?>" class="btn btn-secondary">
-          <i class="fas fa-chart-line"></i>
-          Graficar
-          </a>
-
           <!--Botón de reporte-->
           <a href="/ProyectoBasesDeDatos/pdf/reporte_auxiliares.php?" class="btn btn-light">
           <i class="far fa-file-pdf"></i>
@@ -48,7 +42,8 @@ include('ProyectoBasesDeDatos/includes/header.php');
 
           <a href="/ProyectoBasesDeDatos/pdf/reporte_auxiliares_2.php?" class="btn btn-secondary">
           <i class="far fa-file-pdf"></i>
-          Numero de implementos que ha prestado cada auxiliar
+          <i class="fas fa-chart-bar"></i>
+          Cantidad de implementos que ha prestado cada auxiliar
           </a>
 
         </div>

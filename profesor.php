@@ -52,6 +52,17 @@ body {
 
       </div>
 
+
+      <div class="card card-body" style="margin-top: 20px">
+
+          <!--Botón de reporte-->
+          <a href="/ProyectoBasesDeDatos/pdf/reporte_profesores.php?" class="btn btn-light">
+            <i class="far fa-file-pdf"></i>
+            Listar por nombre y ID profesores que ven dan clase los lunes
+          </a>
+
+
+        </div>
       </div>
 
     <div class="col-md-8">

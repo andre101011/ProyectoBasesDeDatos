@@ -60,6 +60,7 @@ body {
 
       <a href="/ProyectoBasesDeDatos/pdf/reporte_sala_3.php?" class="btn btn-secondary">
       <i class="far fa-file-pdf"></i>
+      <i class="fas fa-chart-bar"></i>
       Conteo de implementos por sala
       </a>
 

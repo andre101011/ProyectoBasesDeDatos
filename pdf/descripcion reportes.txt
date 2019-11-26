@@ -8,5 +8,6 @@ sala 3 avanzado
 estudiantes 1 simple
 estudiantes 2 intermedio
 estudiantes 3 avanzado
+estudiantes 4 avanzado
 
-Falta una intermedia y una avanzada
+profesores 1 intermedio

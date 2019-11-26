@@ -33,7 +33,7 @@ class PDF_MC_Table extends FPDF {
 		$this->SetFont('Arial','',8);
 		
 		//width = 0 means the cell is extended up to the right margin
-		$this->Cell(0,10,'Page '.$this->PageNo()." / {pages}",0,0,'C');
+		$this->Cell(0,10,'Pagina #'.$this->PageNo()." ",0,0,'C');
 	}
 
 
