@@ -26,7 +26,7 @@ $pdf->SetWidths(Array(20,40,80,30,20,40));
 $pdf->SetLineHeight(5);
 
 
-$query = "SELECT auxiliar_id FROM entrada_minuta ";
+$query = "SELECT DISTINCT auxiliar_id FROM entrada_minuta ";
 $data = $conn->query($query);
 
 //add table heading using standard cells

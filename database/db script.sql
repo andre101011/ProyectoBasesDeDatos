@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2019 a las 02:34:45
+-- Tiempo de generación: 01-12-2019 a las 19:37:30
 -- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.1.33
+-- Versión de PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -81,7 +81,14 @@ CREATE TABLE `cable_red` (
 --
 
 INSERT INTO `cable_red` (`codigo`, `categoria`) VALUES
-('11', '9');
+('11', '9'),
+('15', '7'),
+('20', '8'),
+('3', '7'),
+('4', '9'),
+('5', '8'),
+('7', '7'),
+('9', '8');
 
 -- --------------------------------------------------------
 
@@ -122,6 +129,35 @@ CREATE TABLE `computador` (
   `sala_codigo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `computador`
+--
+
+INSERT INTO `computador` (`sistema_operativo`, `gpu`, `cpu`, `marca`, `codigo`, `sala_codigo`) VALUES
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '12', 'A'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '13', 'B'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '14', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '23', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '24', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '25', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '26', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '27', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '28', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '29', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '30', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '31', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '32', 'C'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '33', 'D'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '34', 'D'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '35', 'D'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '36', 'D'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '37', 'D'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '38', 'A'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '39', 'A'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '40', 'A'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '41', 'A'),
+('Windows', 'Nvidia', 'Intel i3', 'Dell', '42', 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -141,7 +177,14 @@ CREATE TABLE `entrada_minuta` (
 --
 
 INSERT INTO `entrada_minuta` (`fecha_entrada`, `fecha_salida`, `id`, `observacion`, `Auxiliar_id`) VALUES
-('2019-11-24 00:00:00.000000', '2019-11-24 07:14:20.000000', 1, 'No hizo nada', 13);
+('2019-11-24 00:00:00.000000', '2019-11-24 07:14:20.000000', 1, 'No hizo nada', 13),
+('2019-12-01 00:00:00.000000', '2019-12-01 09:00:00.000000', 12, NULL, 20),
+('2019-12-01 10:23:00.000000', '2019-12-01 11:25:00.000000', 17, 'Entregó todo', 17),
+('2019-11-20 05:00:00.000000', '2019-11-20 13:00:00.000000', 18, 'Entregó escritorio sucio', 20),
+('2019-11-20 13:00:00.000000', '2019-11-20 15:00:00.000000', 19, 'Entregó escritorio sucio', 19),
+('2019-12-01 00:00:00.000000', '2019-12-01 09:00:00.000000', 23, NULL, 21),
+('2019-12-01 00:00:00.000000', '2019-12-01 09:00:00.000000', 30, NULL, 18),
+('2019-12-01 00:00:00.000000', '2019-12-01 09:00:00.000000', 32, NULL, 18);
 
 -- --------------------------------------------------------
 
@@ -203,11 +246,41 @@ CREATE TABLE `implemento` (
 
 INSERT INTO `implemento` (`observacion`, `codigo`) VALUES
 ('Dañado', '11'),
+('PC Nuevo', '12'),
+('PC Nuevo', '13'),
+('PC Nuevo', '14'),
+('Buen Estado', '15'),
 ('', '16'),
 ('Con rayones', '17'),
 ('En buen estado', '18'),
 ('Excelente', '2'),
-('En buen estado', '21');
+('Buen Estado', '20'),
+('En buen estado', '21'),
+('PC Nuevo', '23'),
+('PC Nuevo', '24'),
+('PC Nuevo', '25'),
+('PC Nuevo', '26'),
+('PC Nuevo', '27'),
+('PC Nuevo', '28'),
+('PC Nuevo', '29'),
+('Buen Estado', '3'),
+('PC Nuevo', '30'),
+('PC Nuevo', '31'),
+('PC Nuevo', '32'),
+('PC Nuevo', '33'),
+('PC Nuevo', '34'),
+('PC Nuevo', '35'),
+('PC Nuevo', '36'),
+('PC Nuevo', '37'),
+('PC Nuevo', '38'),
+('PC Nuevo', '39'),
+('Conector Nuevo', '4'),
+('PC Nuevo', '40'),
+('PC Nuevo', '41'),
+('PC Nuevo', '42'),
+('Conector Debil', '5'),
+('Buen Estado', '7'),
+('Dañado', '9');
 
 -- --------------------------------------------------------
 
@@ -345,7 +418,12 @@ CREATE TABLE `prestamo` (
 --
 
 INSERT INTO `prestamo` (`fecha_devolucion`, `fecha_prestamo`, `id`, `observacion`, `auxiliar_id`, `persona_cedula`) VALUES
-('2019-11-24 00:00:00.000000', '2019-11-25 00:00:00.000000', 1, '', 13, '10366620');
+('2019-11-24 00:00:00.000000', '2019-11-25 00:00:00.000000', 1, '', 13, '10366620'),
+('2019-11-24 04:22:00.000000', '2019-11-25 00:00:00.000000', 3, NULL, 13, '18438331'),
+('2019-11-26 15:39:00.000000', '2019-11-26 14:31:00.000000', 4, NULL, 19, '25315666'),
+('2019-11-25 03:00:00.000000', '2019-11-26 17:13:00.000000', 6, NULL, 19, '22438406'),
+('2019-11-25 16:33:00.000000', '2019-11-25 05:00:00.000000', 11, NULL, 17, '18438331'),
+('2019-11-24 04:22:00.000000', '2019-11-26 14:31:00.000000', 66, NULL, 20, '22438406');
 
 -- --------------------------------------------------------
 
@@ -363,7 +441,17 @@ CREATE TABLE `prestamo_implemento` (
 --
 
 INSERT INTO `prestamo_implemento` (`prestamo_id`, `implemento_codigo`) VALUES
-(1, '11');
+(1, '11'),
+(1, '5'),
+(3, '5'),
+(4, '11'),
+(4, '4'),
+(4, '9'),
+(6, '3'),
+(6, '4'),
+(11, '4'),
+(11, '5'),
+(66, '18');
 
 -- --------------------------------------------------------
 
@@ -594,15 +682,15 @@ ALTER TABLE `cable_red`
 -- Filtros para la tabla `clase`
 --
 ALTER TABLE `clase`
-  ADD CONSTRAINT `Clase_Materia_Profesor_FK` FOREIGN KEY (`Profesor_cedula`,`Materia_codigo`) REFERENCES `materia_profesor` (`profesor_cedula`, `materia_codigo`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Clase_Sala_FK` FOREIGN KEY (`Sala_codigo`) REFERENCES `sala` (`codigo`);
+  ADD CONSTRAINT `Clase_Materia_Profesor_FK` FOREIGN KEY (`profesor_cedula`,`materia_codigo`) REFERENCES `materia_profesor` (`profesor_cedula`, `materia_codigo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Clase_Sala_FK` FOREIGN KEY (`sala_codigo`) REFERENCES `sala` (`codigo`);
 
 --
 -- Filtros para la tabla `computador`
 --
 ALTER TABLE `computador`
   ADD CONSTRAINT `Computador_Implemento_FK` FOREIGN KEY (`codigo`) REFERENCES `implemento` (`codigo`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Computador_Sala_FK` FOREIGN KEY (`Sala_codigo`) REFERENCES `sala` (`codigo`);
+  ADD CONSTRAINT `Computador_Sala_FK` FOREIGN KEY (`sala_codigo`) REFERENCES `sala` (`codigo`);
 
 --
 -- Filtros para la tabla `entrada_minuta`
@@ -634,15 +722,15 @@ ALTER TABLE `materia_profesor`
 -- Filtros para la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
-  ADD CONSTRAINT `Prestamo_Auxiliar_FK` FOREIGN KEY (`Auxiliar_id`) REFERENCES `auxiliar` (`id`),
-  ADD CONSTRAINT `Prestamo_Persona_FK` FOREIGN KEY (`Persona_cedula`) REFERENCES `persona` (`cedula`);
+  ADD CONSTRAINT `Prestamo_Auxiliar_FK` FOREIGN KEY (`auxiliar_id`) REFERENCES `auxiliar` (`id`),
+  ADD CONSTRAINT `Prestamo_Persona_FK` FOREIGN KEY (`persona_cedula`) REFERENCES `persona` (`cedula`);
 
 --
 -- Filtros para la tabla `prestamo_implemento`
 --
 ALTER TABLE `prestamo_implemento`
-  ADD CONSTRAINT `Implemento_FK` FOREIGN KEY (`Implemento_codigo`) REFERENCES `implemento` (`codigo`),
-  ADD CONSTRAINT `Prestamo_FK` FOREIGN KEY (`Prestamo_id`) REFERENCES `prestamo` (`id`);
+  ADD CONSTRAINT `Implemento_FK` FOREIGN KEY (`implemento_codigo`) REFERENCES `implemento` (`codigo`),
+  ADD CONSTRAINT `Prestamo_FK` FOREIGN KEY (`prestamo_id`) REFERENCES `prestamo` (`id`);
 
 --
 -- Filtros para la tabla `profesor`
@@ -654,7 +742,7 @@ ALTER TABLE `profesor`
 -- Filtros para la tabla `turno`
 --
 ALTER TABLE `turno`
-  ADD CONSTRAINT `Turno_Auxiliar_FK` FOREIGN KEY (`Auxiliar_id`) REFERENCES `auxiliar` (`id`);
+  ADD CONSTRAINT `Turno_Auxiliar_FK` FOREIGN KEY (`auxiliar_id`) REFERENCES `auxiliar` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
